@@ -19,10 +19,16 @@ public protocol MetricsManager {
 
     /// Method to add a set of `URLSessionTaskMetrics`
     func add(entry: URLSessionTaskMetrics)
+    
+    func removeAll()
 }
 
 /// Default Metrics Manager instance
 public class DefaultMetricsManager: NSObject, MetricsManager {
+    public func removeAll() {
+        metrics.removeAll()
+    }
+    
     public static var shared: MetricsManager = DefaultMetricsManager()
 
     public lazy var metrics: [URLSessionTaskMetrics] = {

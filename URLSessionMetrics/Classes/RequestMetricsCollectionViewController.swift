@@ -39,7 +39,7 @@ public class RequestMetricsCollectionViewController: UICollectionViewController 
         collectionView?.backgroundColor = .lightGray
 
         collectionView?.register(RequestMetricsCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: CellReuseIdentifier)
-        collectionView?.register(RequestMetricsCollectionViewHeader.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HeaderReuseIdentifier)
+        collectionView?.register(RequestMetricsCollectionViewHeader.classForCoder(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderReuseIdentifier)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(RequestMetricsCollectionViewController.closeViewController))
 
@@ -58,11 +58,11 @@ public class RequestMetricsCollectionViewController: UICollectionViewController 
         refresh()
     }
     //MARK: - Actions
-    func closeViewController() {
+    @objc func closeViewController() {
         self.dismiss(animated: true, completion: nil)
     }
 
-    func refresh() {
+    @objc func refresh() {
         var organized: [String : [URLSessionTaskMetrics]] = [:]
 
         for metric in metricsManager.metrics {
@@ -93,8 +93,8 @@ public class RequestMetricsCollectionViewController: UICollectionViewController 
 
     //MARK: - UICollectionViewDatasource
     override public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionElementKindSectionHeader,
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HeaderReuseIdentifier, for: indexPath) as? RequestMetricsCollectionViewHeader
+        guard kind == UICollectionView.elementKindSectionHeader,
+              let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderReuseIdentifier, for: indexPath) as? RequestMetricsCollectionViewHeader
             else {
             return UICollectionReusableView()
         }
